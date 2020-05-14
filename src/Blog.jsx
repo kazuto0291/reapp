@@ -4,28 +4,48 @@ import Article from "./Article";
 class Blog extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isPublished: false,
+      count: 0
+    }
   }
+
+  componentDidMount() {
+    // ボタンがクリックされたらいいねをカウントアップする
+    document.getElementById("counter").addEventListener('click', this.countUp)
+  }
+
+  componentDidUpdate() {
+    if (this.state.count >= 10) {
+      this.setState({ count: 0 })
+    }
+  };
+
+  // componentWillMount() {
+  //   document.getElementById('counter').removeEventListener('click', this.countUp)
+  // };
+
+  // 公開状態を反転させる関数
+  // togglePublished = () => {
+  //   this.setState( {
+  //     isPublished: !this.state.isPublished
+  //   })
+  // };
+
+  countUp = () => {
+    this.setState( { count: this.state.count + 1})
+  };
+
   render() {
     const authorName = "Reacthack"
     return (
       <>
         <Article
             title={"Reactの使い方"}
-            order={3}
-            isPublished={true}
+            // order={3}
+            isPublished={this.state.isPublished}
             author={authorName}
-        />
-        <Article
-            title={"JSXの使い方"}
-            order={5}
-            isPublished={false}
-            author={authorName}
-        />
-        <Article
-            title={"環境構築をしてみよう"}
-            order={75}
-            isPublished={true}
-            author={authorName}
+            count={this.state.count}
         />
       </>
     )
