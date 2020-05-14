@@ -1,5 +1,9 @@
 import React from 'react';
 import Article from "./Article";
+// import {Foo, Bar} from './components/ForBar';
+import * as FooBar from './components/ForBar';
+import Hoge from './components/Hoge';
+
 
 class Blog extends React.Component {
   constructor(props) {
@@ -47,6 +51,11 @@ class Blog extends React.Component {
             author={authorName}
             count={this.state.count}
         />
+        {/* <Foo /> */}
+        <FooBar.Foo />
+        {/* <Bar /> */}
+        <FooBar.Bar />
+        <Hoge />
       </>
     )
   }
